@@ -1,38 +1,39 @@
-# Voting App - Kubernetes Architecture
+# 🗳️ Voting App - Kubernetes Architecture
 
-Este projeto demonstra uma aplicação de votação em contêineres orquestrada com **Kubernetes**, composta por múltiplos pods e serviços.
+This project demonstrates a **containerized voting application** orchestrated with **Kubernetes**, composed of multiple Pods and Services.
 
-## 🧩 Arquitetura
+## 🧩 Architecture
 
-A aplicação é composta pelos seguintes componentes:
+The application is made up of the following components:
 
 ### 🎯 Frontend
 - **voting-app (Python)**
-  - Exibe a interface de votação ao usuário.
-  - Envia votos para o Redis.
+  - Provides the voting interface for users.  
+  - Sends votes to Redis.
 
 ### 🧠 Backend
 - **worker (Python)**
-  - Escuta eventos no Redis.
-  - Processa os votos e grava os resultados no banco de dados PostgreSQL.
+  - Listens to events from Redis.  
+  - Processes votes and stores results in PostgreSQL.
 
-### 💾 Banco de dados
+### 💾 Database
 - **db (PostgreSQL)**
-  - Armazena os resultados dos votos.
+  - Stores voting results.
 
-### ⚙️ Armazenamento de estado
+### ⚙️ State Storage
 - **redis**
-  - Armazena temporariamente os votos em memória.
+  - Temporarily stores votes in memory.
 
-### 📊 Resultado
+### 📊 Results
 - **result-app (Node.js)**
-  - Exibe os resultados atuais da votação.
+  - Displays the current voting results.
 
 ---
 
-## 🚀 Comunicação entre os Pods
+## 🚀 Pod Communication
 
-Cada componente roda em seu próprio **Pod** e é exposto por um **Service**, permitindo comunicação interna no cluster:
+Each component runs in its own **Pod** and is exposed through a **Service**, enabling internal communication within the cluster:
+
 
 ```plaintext
 [voting-app] --> [redis] --> [worker] --> [db]
